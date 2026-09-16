@@ -123,8 +123,9 @@ when the ads variables are set, and `Lead` for the Meta Pixel.
       and `src/data/offers.ts` against the current dealership scheme.
 - [ ] Replace the sample reviews in `src/data/testimonials.ts` with real,
       permission based customer feedback.
-- [ ] Drop official vehicle photography into `public/` and swap out the
-      placeholder artwork in `src/components/CarArt.tsx`.
+- [ ] Add official vehicle photography. Drop the files into `public/models`
+      named after each model slug and they are used automatically. See
+      `public/models/README.md`.
 - [ ] Set `LEAD_WEBHOOK_URL` and test one lead end to end.
 - [ ] Add GA4, Google Ads and Search Console variables, then verify the
       conversion fires with Google Tag Assistant.
@@ -132,6 +133,15 @@ when the ads variables are set, and `Lead` for the Meta Pixel.
       Console and create the Google Business Profile listing.
 - [ ] Have the dealership confirm the trademark disclaimer wording in the
       footer and in `/terms`.
+
+## Vehicle photography
+
+Official images go in `public/models`, named after the model slug, for example
+`public/models/volkswagen-taigun.webp`. The site detects them at build time and
+switches that model from the vector illustration to an optimised `next/image`
+with AVIF and WebP variants. Models without a file keep the illustration, so
+the set can be filled in one model at a time. Full notes are in
+`public/models/README.md`.
 
 ## Refreshing the monthly scheme
 

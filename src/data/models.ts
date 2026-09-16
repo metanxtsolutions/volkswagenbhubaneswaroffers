@@ -24,6 +24,12 @@ export type Model = {
   body: string[];
   accent: string; // tailwind gradient classes for the card artwork
   badge?: string;
+  /**
+   * Optional absolute image URL. Leave unset and the site picks up
+   * public/models/<slug>.<ext> automatically, which is the preferred route
+   * because the file is then served from our own domain.
+   */
+  imageUrl?: string;
 };
 
 /**

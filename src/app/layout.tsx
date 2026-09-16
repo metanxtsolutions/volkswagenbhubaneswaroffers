@@ -1,9 +1,23 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Manrope } from "next/font/google";
 import Analytics from "@/components/Analytics";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/data/site";
 import { autoDealerSchema, websiteSchema } from "@/lib/schema";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["600", "700", "800"],
+  variable: "--font-manrope",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -23,8 +37,12 @@ export const metadata: Metadata = {
   other: {
     "geo.region": "IN-OR",
     "geo.placename": "Bhubaneswar",
-    "geo.position": `${site.geo.latitude};${site.geo.longitude}`,
-    ICBM: `${site.geo.latitude}, ${site.geo.longitude}`,
+    ...(site.geo
+      ? {
+          "geo.position": `${site.geo.latitude};${site.geo.longitude}`,
+          ICBM: `${site.geo.latitude}, ${site.geo.longitude}`,
+        }
+      : {}),
   },
 };
 
@@ -36,7 +54,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" className={`${inter.variable} ${manrope.variable}`}>
       <body className="antialiased">
         <JsonLd data={[autoDealerSchema(), websiteSchema()]} />
         {children}

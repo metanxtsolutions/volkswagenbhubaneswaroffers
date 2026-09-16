@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import CarArt from "@/components/CarArt";
+import ModelVisual from "@/components/ModelVisual";
 import CtaBand from "@/components/CtaBand";
 import Faqs from "@/components/Faqs";
 import JsonLd from "@/components/JsonLd";
@@ -37,9 +37,6 @@ export async function generateMetadata({ params }: Params) {
   });
 }
 
-const shapeFor = (bodyType: string) =>
-  bodyType.toLowerCase().includes("sedan") ? "sedan" : bodyType.toLowerCase().includes("hatch") ? "hatch" : "suv";
-
 export default async function ModelPage({ params }: Params) {
   const { slug } = await params;
   const model = modelBySlug(slug);
@@ -61,7 +58,7 @@ export default async function ModelPage({ params }: Params) {
       <section className="container-page grid gap-10 py-8 lg:grid-cols-[1.05fr_minmax(340px,0.95fr)] lg:py-12">
         <div>
           <div className={`overflow-hidden rounded-2xl bg-gradient-to-br ${model.accent} p-6`}>
-            <CarArt shape={shapeFor(model.bodyType)} label={model.fullName} className="mx-auto h-52 w-full max-w-md" />
+            <ModelVisual model={model} priority className="mx-auto h-56 w-full max-w-lg" sizes="(max-width: 1024px) 100vw, 620px" />
           </div>
 
           <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-vw-cyan-dark">{model.bodyType}</p>

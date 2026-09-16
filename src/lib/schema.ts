@@ -1,4 +1,4 @@
-import { absoluteUrl, site } from "@/data/site";
+import { absoluteUrl, locations, site } from "@/data/site";
 import type { Faq } from "@/data/faqs";
 import type { Model } from "@/data/models";
 
@@ -28,19 +28,44 @@ export function autoDealerSchema() {
       postalCode: site.address.postalCode,
       addressCountry: site.address.country,
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: site.geo.latitude,
-      longitude: site.geo.longitude,
-    },
+    ...(site.geo
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: site.geo.latitude,
+            longitude: site.geo.longitude,
+          },
+        }
+      : {}),
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        opens: "09:30",
-        closes: "19:30",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: "10:00",
+        closes: "19:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Sunday"],
+        opens: "10:00",
+        closes: "18:30",
       },
     ],
+    department: locations
+      .filter((location) => location.kind === "Service centre")
+      .map((location) => ({
+        "@type": "AutoRepair",
+        name: location.name,
+        telephone: location.phone,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: location.street,
+          addressLocality: location.locality,
+          addressRegion: location.region,
+          postalCode: location.postalCode,
+          addressCountry: "IN",
+        },
+      })),
     areaServed: {
       "@type": "State",
       name: "Odisha",

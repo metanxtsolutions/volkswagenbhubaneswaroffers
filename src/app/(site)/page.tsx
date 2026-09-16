@@ -12,7 +12,7 @@ import TrustBar from "@/components/TrustBar";
 import { generalFaqs } from "@/data/faqs";
 import { models } from "@/data/models";
 import { usps } from "@/data/offers";
-import { site } from "@/data/site";
+import { locations, site } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
 import { faqSchema } from "@/lib/schema";
 
@@ -85,7 +85,15 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <p className="mt-6 text-xs text-slate-400">{site.offerValidity}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/15 pt-6 text-xs text-slate-300">
+              <span className="font-semibold text-white">Authorised Volkswagen sales partner</span>
+              <span>{locations[0].street.split(",").slice(-2).join(",").trim()}, Bhubaneswar</span>
+              <span>
+                Open {site.openingHours.days}, {site.openingHours.time}
+              </span>
+            </div>
+
+            <p className="mt-4 text-xs text-slate-400">{site.offerValidity}</p>
           </div>
 
           <div id="enquiry" className="scroll-mt-24">
@@ -148,7 +156,7 @@ export default function HomePage() {
               {usps.map((usp) => (
                 <div key={usp.title} className="rounded-xl border border-vw-line bg-white p-5">
                   <h3 className="text-base font-bold text-vw-blue">{usp.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{usp.detail}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{usp.detail}</p>
                 </div>
               ))}
             </div>

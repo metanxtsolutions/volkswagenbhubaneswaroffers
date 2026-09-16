@@ -16,6 +16,8 @@ const nextConfig: NextConfig = {
     return [
       { source: "/home", destination: "/", permanent: true },
       { source: "/offer", destination: "/offers", permanent: true },
+      { source: "/car-loan-emi-calculator", destination: "/finance", permanent: true },
+      { source: "/about", destination: "/dealership", permanent: true },
     ];
   },
   async headers() {

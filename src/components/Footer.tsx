@@ -1,128 +1,153 @@
 import Link from "next/link";
+import Arrow from "./Arrow";
+import Logo from "./Logo";
 import { cities } from "@/data/cities";
 import { models } from "@/data/models";
 import { locations, site } from "@/data/site";
 
-const quickLinks = [
-  { label: "Current offers", href: "/offers" },
-  { label: "All models", href: "/models" },
-  { label: "Book a test drive", href: "/book-test-drive" },
-  { label: "EMI calculator", href: "/car-loan-emi-calculator" },
-  { label: "On road price", href: "/on-road-price-bhubaneswar" },
-  { label: "About us", href: "/about" },
-  { label: "Contact", href: "/contact" },
+const columns = [
+  {
+    title: "Models",
+    links: models.map((model) => ({ label: model.fullName, href: `/models/${model.slug}` })),
+  },
+  {
+    title: "Buying",
+    links: [
+      { label: "Current offers", href: "/offers" },
+      { label: "Book a test drive", href: "/book-test-drive" },
+      { label: "Finance and EMI", href: "/finance" },
+      { label: "On road price", href: "/on-road-price-bhubaneswar" },
+      { label: "Das WeltAuto", href: "/used-cars" },
+    ],
+  },
+  {
+    title: "Owning",
+    links: [
+      { label: "Service and maintenance", href: "/service" },
+      { label: "Genuine accessories", href: "/accessories" },
+      { label: "News and campaigns", href: "/news" },
+      { label: "Owner reviews", href: "/reviews" },
+    ],
+  },
+  {
+    title: "Dealership",
+    links: [
+      { label: "About us", href: "/dealership" },
+      { label: "Odisha locations", href: "/volkswagen-showroom" },
+      { label: "Contact", href: "/contact" },
+      { label: "Privacy policy", href: "/privacy-policy" },
+      { label: "Terms of use", href: "/terms" },
+    ],
+  },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-20 bg-vw-blue text-slate-300">
-      <div className="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-vw-blue text-white">
+      <div className="shell grid gap-14 py-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)] lg:py-20">
         <div>
-          <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full border-[3px] border-white text-[13px] font-extrabold text-white">
-              VW
-            </span>
-            <span className="text-base font-bold text-white">Volkswagen Bhubaneswar Offers</span>
-          </div>
-          <p className="mt-4 text-sm leading-relaxed">
-            Authorised Volkswagen sales partner for Bhubaneswar and Odisha. Book with the running month offer,
-            transparent on road pricing and a free home test drive.
+          <Logo tone="light" />
+          <p className="mt-7 max-w-sm text-sm leading-relaxed text-white/60">
+            Authorised Volkswagen sales and service partner for Bhubaneswar and Odisha. Transparent on road pricing,
+            finance arranged in house, and delivery across the state.
           </p>
 
-          <div className="mt-6 grid gap-5">
+          <div className="mt-10 grid gap-8">
             {locations.map((location) => (
               <div key={location.id}>
-                <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-vw-cyan">{location.kind}</p>
-                <address className="mt-1.5 not-italic text-sm leading-relaxed">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-vw-cyan">{location.kind}</p>
+                <address className="mt-3 not-italic text-sm leading-relaxed text-white/70">
                   {location.street}
                   <br />
                   {location.locality}, {location.region} {location.postalCode}
                 </address>
-                <p className="mt-1.5 text-sm">
-                  <a href={`tel:${location.phone}`} className="font-bold text-white hover:text-vw-cyan">
+                <p className="mt-2">
+                  <a href={`tel:${location.phone}`} className="text-sm text-white transition-colors hover:text-vw-cyan">
                     {location.phoneDisplay}
                   </a>
                 </p>
-                <p className="mt-1 text-xs text-slate-400">
+                <p className="mt-1 text-xs text-white/45">
                   {location.hours.map((slot) => `${slot.days}: ${slot.time}`).join(" | ")}
                 </p>
               </div>
             ))}
           </div>
 
-          <p className="mt-5 text-sm">
-            <a href={`mailto:${site.email}`} className="hover:text-vw-cyan">
+          <p className="mt-8 text-sm">
+            <a href={`mailto:${site.email}`} className="text-white/70 transition-colors hover:text-vw-cyan">
               {site.email}
             </a>
           </p>
         </div>
 
-        <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-white">Quick links</h2>
-          <ul className="mt-4 grid gap-2.5 text-sm">
-            {quickLinks.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="hover:text-vw-cyan">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="grid gap-10 sm:grid-cols-2 xl:grid-cols-4">
+          {columns.map((column) => (
+            <nav key={column.title} aria-label={column.title}>
+              <h2 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40">{column.title}</h2>
+              <ul className="mt-5 grid gap-3">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-sm text-white/70 transition-colors hover:text-vw-cyan">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
+      </div>
 
-        <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-white">Models</h2>
-          <ul className="mt-4 grid gap-2.5 text-sm">
-            {models.map((model) => (
-              <li key={model.slug}>
-                <Link href={`/models/${model.slug}`} className="hover:text-vw-cyan">
-                  {model.fullName} price
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-white">We serve across Odisha</h2>
-          <ul className="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-sm">
+      <div className="border-t border-white/10">
+        <div className="shell py-10">
+          <h2 className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40">
+            Volkswagen across Odisha
+          </h2>
+          <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2.5">
             {cities.map((city) => (
               <li key={city.slug}>
-                <Link href={`/volkswagen-showroom/${city.slug}`} className="hover:text-vw-cyan">
+                <Link
+                  href={`/volkswagen-showroom/${city.slug}`}
+                  className="text-xs text-white/55 transition-colors hover:text-vw-cyan"
+                >
                   {city.name}
                 </Link>
               </li>
             ))}
           </ul>
+          <Link href="/volkswagen-showroom" className="mt-6 inline-flex items-center gap-2 text-xs text-vw-cyan">
+            All locations <Arrow />
+          </Link>
         </div>
       </div>
 
-      <div className="border-t border-white/15">
-        <div className="container-page flex flex-col gap-4 py-6 text-xs leading-relaxed text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-t border-white/10">
+        <div className="shell flex flex-col gap-5 py-8 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {year} {site.name}. All rights reserved.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="/privacy-policy" className="hover:text-vw-cyan">
-              Privacy policy
+          <div className="flex flex-wrap gap-6">
+            <Link href="/privacy-policy" className="transition-colors hover:text-vw-cyan">
+              Privacy
             </Link>
-            <Link href="/terms" className="hover:text-vw-cyan">
-              Terms of use
+            <Link href="/terms" className="transition-colors hover:text-vw-cyan">
+              Terms
             </Link>
-            <Link href="/sitemap.xml" className="hover:text-vw-cyan">
+            <Link href="/sitemap.xml" className="transition-colors hover:text-vw-cyan">
               Sitemap
             </Link>
           </div>
         </div>
-        <div className="container-page pb-8 text-[11px] leading-relaxed text-slate-500">
+        <div className="shell pb-10 text-[11px] leading-relaxed text-white/35">
           <p>
-            Disclaimer: this website is operated by an authorised Volkswagen sales partner for lead generation in
-            Bhubaneswar and Odisha. Volkswagen, the Volkswagen logo and model names are trademarks of Volkswagen AG.
-            Prices, offers, specifications and colours shown here are indicative, apply for a limited period and can
-            change without notice. Please confirm the final on road price, variant availability and scheme details with
-            our sales team before booking.
+            This website is operated by an authorised Volkswagen sales and service partner for Bhubaneswar and Odisha.
+            It is not the official national website of Volkswagen India. Volkswagen, the Volkswagen logo and all model
+            names are trademarks of Volkswagen AG, used here to describe the vehicles we retail and service. Prices,
+            offers, specifications, colours and availability shown here are indicative, apply for a limited period and
+            can change without notice. Please confirm the final on road price and specification with our sales team
+            before booking.
           </p>
         </div>
       </div>

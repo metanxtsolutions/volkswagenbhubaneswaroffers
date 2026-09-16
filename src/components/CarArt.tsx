@@ -111,13 +111,16 @@ export default function CarArt({
   shape = "suv",
   className = "",
   label,
+  paint = "#dfe5ec",
 }: {
   shape?: Shape;
   className?: string;
   label?: string;
+  /** Body colour, so each model reads as its own car rather than a grey blob. */
+  paint?: string;
 }) {
   const car = shapes[shape];
-  const id = `car-${shape}`;
+  const id = `car-${shape}-${paint.replace("#", "")}`;
 
   return (
     <svg
@@ -128,9 +131,10 @@ export default function CarArt({
     >
       <defs>
         <linearGradient id={`${id}-body`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="46%" stopColor="#eef2f7" />
-          <stop offset="100%" stopColor="#c2ccdb" />
+          <stop offset="0%" stopColor={`color-mix(in srgb, ${paint} 22%, white)`} />
+          <stop offset="40%" stopColor={`color-mix(in srgb, ${paint} 88%, white)`} />
+          <stop offset="78%" stopColor={paint} />
+          <stop offset="100%" stopColor={`color-mix(in srgb, ${paint} 72%, #0a1c33)`} />
         </linearGradient>
         <linearGradient id={`${id}-glass`} x1="0.1" y1="0" x2="0.9" y2="1">
           <stop offset="0%" stopColor="#1e3a5f" />
@@ -152,10 +156,10 @@ export default function CarArt({
 
       <path d={car.body} fill={`url(#${id}-body)`} />
       <path d={car.glass} fill={`url(#${id}-glass)`} />
-      <path d={car.pillar} stroke="#c2ccdb" strokeWidth="5" strokeLinecap="round" fill="none" />
-      <path d={car.rocker} fill="#8fa0b8" opacity="0.75" />
-      <path d={car.door} stroke="#aab7c9" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-      <path d={car.lamp} fill="#f8fafc" stroke="#cbd5e1" strokeWidth="1" />
+      <path d={car.pillar} stroke={`color-mix(in srgb, ${paint} 85%, white)`} strokeWidth="5" strokeLinecap="round" fill="none" />
+      <path d={car.rocker} fill={`color-mix(in srgb, ${paint} 60%, #0a1c33)`} opacity="0.55" />
+      <path d={car.door} stroke={`color-mix(in srgb, ${paint} 55%, #0a1c33)`} strokeOpacity="0.45" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+      <path d={car.lamp} fill="#f8fafc" stroke="#cbd5e1" strokeWidth="0.8" />
 
       {/* Shoulder crease catching the light */}
       <path
@@ -168,12 +172,12 @@ export default function CarArt({
       />
 
       {car.handle.map(([x, y]) => (
-        <rect key={`${x}-${y}`} x={x} y={y} width="22" height="5" rx="2.5" fill="#9fadc0" />
+        <rect key={`${x}-${y}`} x={x} y={y} width="22" height="5" rx="2.5" fill={`color-mix(in srgb, ${paint} 50%, #0a1c33)`} opacity="0.5" />
       ))}
 
       <path
         d={`M${car.mirror[0]} ${car.mirror[1]} l16 -3 c5 -1 8 2 7 6 l-1 5 c-1 4 -5 5 -9 3 l-13 -6 z`}
-        fill="#b8c3d3"
+        fill={`color-mix(in srgb, ${paint} 80%, #0a1c33)`}
       />
 
       <Wheel cx={car.rearWheel} cy={car.wheelY} r={car.wheelR} />

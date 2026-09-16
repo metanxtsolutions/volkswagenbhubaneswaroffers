@@ -1,27 +1,29 @@
 import Link from "next/link";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import CtaBand from "@/components/CtaBand";
+import Arrow from "@/components/Arrow";
+import Button from "@/components/Button";
 import Faqs from "@/components/Faqs";
 import JsonLd from "@/components/JsonLd";
 import LeadForm from "@/components/LeadForm";
 import OffersGrid from "@/components/OffersGrid";
-import SectionHeading from "@/components/SectionHeading";
+import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
+import SectionHeader from "@/components/SectionHeader";
 import { generalFaqs } from "@/data/faqs";
 import { models } from "@/data/models";
-import { site } from "@/data/site";
+import { site, telHref } from "@/data/site";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Volkswagen Offers and Discounts in Bhubaneswar This Month",
+  title: "Volkswagen Offers in Bhubaneswar | Discounts and Exchange Bonus",
   description:
-    "Running Volkswagen offers in Bhubaneswar: cash discount up to Rs 1,00,000, exchange bonus up to Rs 40,000, corporate benefit and low EMI finance on Tera, Taigun, Virtus, Tiguan and Golf GTI.",
+    "Running Volkswagen offers in Bhubaneswar: cash benefit, exchange bonus, corporate discount and low interest finance on the Taigun, Virtus, Tayron R-Line, Tiguan R-Line and Golf GTI.",
   path: "/offers",
   keywords: [
-    "volkswagen discount bhubaneswar",
-    "volkswagen offers odisha",
+    "volkswagen offers bhubaneswar",
+    "volkswagen discount odisha",
     "volkswagen exchange bonus",
-    "volkswagen corporate discount",
+    "volkswagen corporate discount india",
   ],
 });
 
@@ -31,108 +33,99 @@ const crumbs = [
 ];
 
 const steps = [
-  {
-    title: "Share your requirement",
-    detail: "Tell us the model, variant and colour you have in mind, plus your city and budget.",
-  },
-  {
-    title: "Get the written price",
-    detail: "We send the ex showroom price, RTO, insurance, accessories and the applicable benefit on WhatsApp.",
-  },
-  {
-    title: "Test drive at home",
-    detail: "We bring the car to you, at your home or office, at a time that suits your schedule.",
-  },
-  {
-    title: "Book and drive home",
-    detail: "Finance, insurance and registration are handled by us. Most deliveries happen within three to seven days.",
-  },
+  { title: "Share your requirement", detail: "Model, variant and colour, plus your city and how soon you want delivery." },
+  { title: "Get the written price", detail: "Ex showroom, RTO, insurance, accessories and the applicable benefit, itemised on WhatsApp." },
+  { title: "Test drive at home", detail: "We bring the car to you in Bhubaneswar or Cuttack, at a time that suits you." },
+  { title: "Book and drive home", detail: "Finance, insurance and registration handled by us. Most deliveries happen within three to seven days." },
 ];
 
 export default function OffersPage() {
   return (
     <>
       <JsonLd data={[breadcrumbSchema(crumbs), faqSchema(generalFaqs)]} />
-      <Breadcrumbs items={crumbs} />
 
-      <section className="container-page grid gap-10 py-10 lg:grid-cols-[1.05fr_minmax(340px,0.95fr)] lg:py-14">
-        <div>
-          <h1 className="text-3xl font-extrabold leading-tight text-vw-blue sm:text-4xl">
-            Volkswagen offers in Bhubaneswar this month
-          </h1>
-          <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
-            Every benefit listed below is live right now at our Bhubaneswar showroom and applies to buyers across
-            Odisha. Most of them stack, so the final saving on your chosen variant is usually higher than any single
-            line here.
-          </p>
-          <p className="mt-4 rounded-xl border border-vw-line bg-vw-grey px-4 py-3 text-sm text-slate-700">
-            {site.offerValidity}
-          </p>
+      <PageHero
+        crumbs={crumbs}
+        kicker="Running scheme"
+        title="This month's offers, in full."
+        lead="Every benefit below is live at our Pahal showroom and applies to buyers across Odisha. Most of them stack, so the saving on your chosen variant is usually higher than any single line here."
+      >
+        <div className="flex flex-wrap gap-3">
+          <Button href="#enquiry">Get my exact benefit</Button>
+          <Button href={telHref} variant="outline">
+            Call {site.phoneDisplay}
+          </Button>
+        </div>
+      </PageHero>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+      <section className="band">
+        <div className="shell">
+          <SectionHeader kicker="What you can claim" title="Benefits running now" />
+          <Reveal className="mt-14">
+            <OffersGrid />
+          </Reveal>
+          <p className="mt-8 text-xs text-ink-faint">{site.offerValidity}</p>
+        </div>
+      </section>
+
+      <section className="band bg-mist">
+        <div className="shell">
+          <SectionHeader kicker="By model" title="What applies to which car" />
+          <Reveal className="mt-14 grid gap-px border border-hairline bg-hairline md:grid-cols-2 xl:grid-cols-3">
             {models.map((model) => (
-              <Link
-                key={model.slug}
-                href={`/models/${model.slug}`}
-                className="flex items-center justify-between rounded-xl border border-vw-line bg-white px-4 py-3 text-sm transition hover:border-vw-cyan"
-              >
-                <span>
-                  <span className="block font-bold text-vw-blue">{model.fullName}</span>
-                  <span className="block text-xs text-slate-500">{model.offer}</span>
-                </span>
-                <span aria-hidden className="text-vw-cyan-dark">
-                  →
+              <Link key={model.slug} href={`/models/${model.slug}`} className="group bg-white p-8 transition-colors hover:bg-mist">
+                <p className="text-[11px] uppercase tracking-[0.14em] text-ink-faint">{model.bodyType}</p>
+                <h3 className="mt-3 text-title font-light">{model.fullName}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-ink-soft">{model.offer}</p>
+                <p className="mt-5 text-sm text-vw-blue">From {model.priceFrom}</p>
+                <span className="arrow-link mt-6 text-sm">
+                  Model details <Arrow />
                 </span>
               </Link>
             ))}
-          </div>
-        </div>
-
-        <div id="enquiry" className="scroll-mt-24">
-          <LeadForm
-            source="offers-page"
-            heading="Get the exact benefit on your variant"
-            subheading="Offers change with stock and manufacturing month. Share your details and we will send the live number."
-            ctaLabel="Send me the offer"
-          />
+          </Reveal>
         </div>
       </section>
 
-      <section className="container-page py-8">
-        <SectionHeading eyebrow="What you can claim" title="Benefits running on Volkswagen cars" />
-        <div className="mt-10">
-          <OffersGrid />
-        </div>
-      </section>
-
-      <section className="mt-8 bg-vw-grey py-16 sm:py-20">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="How it works"
+      <section className="band">
+        <div className="shell">
+          <SectionHeader
+            kicker="How it works"
             title="Four steps from enquiry to delivery"
-            subtitle="No showroom visit needed until you want one."
+            lead="No showroom visit needed until you want one."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-px border border-hairline bg-hairline md:grid-cols-2 xl:grid-cols-4">
             {steps.map((step, index) => (
-              <div key={step.title} className="rounded-2xl border border-vw-line bg-white p-6">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-vw-blue text-sm font-bold text-vw-cyan">
-                  {index + 1}
-                </span>
-                <h3 className="mt-4 text-base font-bold text-vw-blue">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{step.detail}</p>
-              </div>
+              <Reveal key={step.title} delay={index * 70} className="bg-white p-8 lg:p-10">
+                <p className="font-display text-sm font-light text-vw-cyan-deep">0{index + 1}</p>
+                <h3 className="mt-5 text-title font-light">{step.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-ink-soft">{step.detail}</p>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <Faqs faqs={generalFaqs} title="Offer and pricing questions" />
+      <section id="enquiry" className="scroll-mt-24 bg-vw-blue text-white">
+        <div className="shell band grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(400px,0.9fr)] lg:gap-20">
+          <SectionHeader
+            tone="light"
+            kicker="Enquire"
+            title="Offers change with stock and manufacturing month"
+            lead="Share your details and we will send the live figure for your variant, in writing, today."
+          />
+          <Reveal delay={120}>
+            <LeadForm
+              source="offers-page"
+              heading="Get the exact benefit"
+              subheading="We will confirm what applies to the variant and colour you want."
+              ctaLabel="Send me the offer"
+            />
+          </Reveal>
+        </div>
+      </section>
 
-      <CtaBand
-        title="Want the running offer in writing?"
-        subtitle="Call or message us and we will send the full on road breakup for your variant today."
-        whatsappMessage="Hi, please send me the current Volkswagen offer and on road price in Bhubaneswar."
-      />
+      <Faqs faqs={generalFaqs} title="Offer and pricing questions" kicker="Good to know" />
     </>
   );
 }

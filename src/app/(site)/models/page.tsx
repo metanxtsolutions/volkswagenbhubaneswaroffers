@@ -1,19 +1,25 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
-import CtaBand from "@/components/CtaBand";
+import Link from "next/link";
+import Arrow from "@/components/Arrow";
+import Button from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
-import LeadForm from "@/components/LeadForm";
 import ModelCard from "@/components/ModelCard";
-import SectionHeading from "@/components/SectionHeading";
+import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
+import SectionHeader from "@/components/SectionHeader";
 import { models } from "@/data/models";
 import { breadcrumbSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Volkswagen Cars Price List in Bhubaneswar, Odisha",
+  title: "Volkswagen Cars in Bhubaneswar | Price List and Range",
   description:
-    "Compare all Volkswagen models on sale in Bhubaneswar: Tera, Taigun, Virtus, Tiguan R-Line and Golf GTI. Ex showroom price, EMI, engine, mileage and safety at a glance.",
+    "The full Volkswagen range at our Bhubaneswar showroom: Taigun, Virtus, Tayron R-Line, Tiguan R-Line and Golf GTI. Compare price, engines, mileage and safety, then book a test drive.",
   path: "/models",
-  keywords: ["volkswagen car price list bhubaneswar", "volkswagen models india", "volkswagen cars odisha"],
+  keywords: [
+    "volkswagen car price list bhubaneswar",
+    "volkswagen models india price",
+    "volkswagen taigun virtus tayron price odisha",
+  ],
 });
 
 const crumbs = [
@@ -21,77 +27,99 @@ const crumbs = [
   { name: "Models", path: "/models" },
 ];
 
+const segments = ["SUV", "Sedan", "Performance"];
+
 export default function ModelsPage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema(crumbs)} />
-      <Breadcrumbs items={crumbs} />
 
-      <section className="container-page py-10 sm:py-14">
-        <h1 className="max-w-3xl text-3xl font-extrabold leading-tight text-vw-blue sm:text-4xl">
-          Volkswagen car price list in Bhubaneswar
-        </h1>
-        <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
-          Five models, one engineering philosophy. Every Volkswagen sold here runs a turbocharged TSI petrol engine and
-          is built on a body shell designed for crash protection. Prices below are indicative ex showroom figures for
-          Bhubaneswar.
-        </p>
-
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {models.map((model) => (
-            <ModelCard key={model.slug} model={model} />
-          ))}
+      <PageHero
+        crumbs={crumbs}
+        kicker="The range"
+        title="Every Volkswagen, one showroom."
+        lead="Five model families, all turbocharged TSI petrol, all built on body structures engineered for crash protection. Indicative ex showroom prices for Bhubaneswar."
+      >
+        <div className="flex flex-wrap gap-3">
+          <Button href="/book-test-drive">Book a test drive</Button>
+          <Button href="/offers" variant="outline">
+            See current offers
+          </Button>
         </div>
-      </section>
+      </PageHero>
 
-      <section className="bg-vw-grey py-16 sm:py-20">
-        <div className="container-page">
-          <SectionHeading eyebrow="Side by side" title="Quick comparison" />
-          <div className="mt-10 overflow-x-auto rounded-2xl border border-vw-line bg-white">
-            <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="bg-vw-blue text-white">
-                <tr>
-                  <th scope="col" className="px-5 py-4 font-semibold">Model</th>
-                  <th scope="col" className="px-5 py-4 font-semibold">Body type</th>
-                  <th scope="col" className="px-5 py-4 font-semibold">Ex showroom from</th>
-                  <th scope="col" className="px-5 py-4 font-semibold">Engine</th>
-                  <th scope="col" className="px-5 py-4 font-semibold">Mileage</th>
-                  <th scope="col" className="px-5 py-4 font-semibold">Safety</th>
+      {segments.map((segment) => {
+        const list = models.filter((model) => model.segment === segment);
+        if (list.length === 0) return null;
+
+        return (
+          <section key={segment} className="band-tight border-b border-hairline last:border-b-0">
+            <div className="shell">
+              <Reveal>
+                <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-faint">
+                  {segment}
+                  <span className="ml-3 text-ink-faint/60">
+                    {list.length} model{list.length > 1 ? "s" : ""}
+                  </span>
+                </h2>
+              </Reveal>
+              <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                {list.map((model, index) => (
+                  <Reveal key={model.slug} delay={index * 70}>
+                    <ModelCard model={model} priority={segment === "SUV" && index < 2} />
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
+      <section className="band bg-mist">
+        <div className="shell">
+          <SectionHeader kicker="Side by side" title="The range, compared" />
+          <Reveal className="mt-12 overflow-x-auto border border-hairline bg-white">
+            <table className="w-full min-w-[860px] text-left text-sm">
+              <thead>
+                <tr className="border-b border-hairline">
+                  {["Model", "Body", "Ex showroom from", "Engines", "Mileage", "Safety", ""].map((head) => (
+                    <th
+                      key={head}
+                      scope="col"
+                      className="px-6 py-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint"
+                    >
+                      {head}
+                    </th>
+                  ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-vw-line">
+              <tbody>
                 {models.map((model) => (
-                  <tr key={model.slug} className="align-top">
-                    <th scope="row" className="px-5 py-4 font-bold text-vw-blue">{model.fullName}</th>
-                    <td className="px-5 py-4 text-slate-600">{model.bodyType}</td>
-                    <td className="px-5 py-4 font-semibold text-slate-800">{model.priceFrom}</td>
-                    <td className="px-5 py-4 text-slate-600">{model.engines.join(", ")}</td>
-                    <td className="px-5 py-4 text-slate-600">{model.mileage}</td>
-                    <td className="px-5 py-4 text-slate-600">{model.safety}</td>
+                  <tr key={model.slug} className="border-b border-hairline align-top last:border-b-0">
+                    <th scope="row" className="px-6 py-6 font-display text-base font-normal text-vw-blue">
+                      {model.fullName}
+                    </th>
+                    <td className="px-6 py-6 text-ink-soft">{model.bodyType}</td>
+                    <td className="px-6 py-6 text-vw-blue">{model.priceFrom}</td>
+                    <td className="px-6 py-6 text-ink-soft">{model.engines.join(", ")}</td>
+                    <td className="px-6 py-6 text-ink-soft">{model.mileage}</td>
+                    <td className="px-6 py-6 text-ink-soft">{model.safety}</td>
+                    <td className="px-6 py-6">
+                      <Link href={`/models/${model.slug}`} className="arrow-link text-sm whitespace-nowrap">
+                        Details <Arrow />
+                      </Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
-          <p className="mt-4 text-xs text-slate-500">
+          </Reveal>
+          <p className="mt-5 text-xs text-ink-faint">
             Prices are indicative ex showroom figures and change with variant, colour and the running scheme. Mileage
-            figures are ARAI certified and vary with driving conditions.
+            is ARAI certified and varies with driving conditions.
           </p>
         </div>
       </section>
-
-      <section className="container-page py-16">
-        <div className="mx-auto max-w-2xl" id="enquiry">
-          <LeadForm
-            source="models-page"
-            heading="Not sure which model fits you?"
-            subheading="Tell us your budget and how you drive. Our consultant will recommend the right variant and send the price."
-            ctaLabel="Help me choose"
-          />
-        </div>
-      </section>
-
-      <CtaBand />
     </>
   );
 }

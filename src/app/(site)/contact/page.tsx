@@ -1,7 +1,10 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
+import Arrow from "@/components/Arrow";
+import Button from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import LeadForm from "@/components/LeadForm";
-import SectionHeading from "@/components/SectionHeading";
+import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
+import SectionHeader from "@/components/SectionHeader";
 import { locations, site, telHref, whatsappHref } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
@@ -9,11 +12,11 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Contact Volkswagen Bhubaneswar | Showroom and Service Centre",
   description:
-    "Call or visit the Volkswagen sales showroom at Pahal, NH 16, Bhubaneswar, or the service centre at Bhanpur. Offers, on road price, finance and test drives across Odisha.",
+    "Call, WhatsApp or visit the Volkswagen sales showroom at Pahal, NH 16, Bhubaneswar, or the authorised service centre at Bhanpur. Offers, on road price, finance and test drives across Odisha.",
   path: "/contact",
   keywords: [
     "volkswagen bhubaneswar contact number",
-    "volkswagen showroom pahal bhubaneswar",
+    "volkswagen showroom pahal address",
     "volkswagen service centre bhanpur",
   ],
 });
@@ -27,108 +30,93 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd data={breadcrumbSchema(crumbs)} />
-      <Breadcrumbs items={crumbs} />
 
-      <section className="container-page grid gap-10 py-10 lg:grid-cols-[1.05fr_minmax(340px,0.95fr)] lg:py-14">
-        <div>
-          <h1 className="text-3xl font-extrabold leading-tight text-vw-blue sm:text-4xl">Contact us</h1>
-          <p className="mt-5 text-base leading-relaxed text-ink-soft sm:text-lg">
-            Sales and service run from two locations on NH 16. Call for an instant answer on price and availability, or
-            send your requirement on WhatsApp and we will reply with a written quote.
-          </p>
-
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            <a
-              href={telHref}
-              className="surface surface-hover p-5"
-            >
-              <p className="eyebrow">Call sales</p>
-              <p className="mt-2 text-lg font-bold text-vw-blue">{site.phoneDisplay}</p>
-              <p className="mt-1 text-sm text-ink-soft">
-                {site.openingHours.days}, {site.openingHours.time}
-              </p>
-            </a>
-
-            <a
-              href={whatsappHref("Hi, I would like to know the current Volkswagen offers in Bhubaneswar.")}
-              className="surface surface-hover p-5"
-            >
-              <p className="eyebrow">WhatsApp</p>
-              <p className="mt-2 text-lg font-bold text-vw-blue">Chat with sales</p>
-              <p className="mt-1 text-sm text-ink-soft">Fastest way to get a written price</p>
-            </a>
-          </div>
-
-          <div className="mt-6 grid gap-5 sm:grid-cols-2">
-            {locations.map((location) => (
-              <div key={location.id} className="surface p-6">
-                <p className="eyebrow">{location.kind}</p>
-                <h2 className="mt-2 text-lg font-bold text-vw-blue">{location.name}</h2>
-                <address className="mt-3 not-italic text-sm leading-relaxed text-ink-soft">
-                  {location.street}
-                  <br />
-                  {location.locality}, {location.region} {location.postalCode}
-                </address>
-                <p className="mt-3 text-sm">
-                  <a href={`tel:${location.phone}`} className="font-bold text-vw-blue hover:text-vw-cyan-dark">
-                    {location.phoneDisplay}
-                  </a>
-                </p>
-                <dl className="mt-3 grid gap-1 text-sm text-ink-soft">
-                  {location.hours.map((slot) => (
-                    <div key={slot.days} className="flex justify-between gap-4">
-                      <dt>{slot.days}</dt>
-                      <dd className="font-medium text-vw-blue">{slot.time}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <a
-                  href={location.mapsUrl}
-                  target="_blank"
-                  rel="noopener"
-                  className="mt-4 inline-flex text-sm font-semibold text-vw-cyan-dark hover:underline"
-                >
-                  Open in Google Maps
-                </a>
-              </div>
-            ))}
-          </div>
-
-          <div className="surface mt-6 overflow-hidden p-0">
-            <iframe
-              title="Volkswagen Bhubaneswar sales showroom location at Pahal"
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(site.mapEmbedQuery)}&output=embed`}
-              className="h-[340px] w-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-
-          <p className="mt-4 text-sm text-ink-soft">
-            Email us at{" "}
-            <a href={`mailto:${site.email}`} className="font-semibold text-vw-cyan-dark hover:underline">
-              {site.email}
-            </a>{" "}
-            for corporate and fleet enquiries.
-          </p>
+      <PageHero
+        crumbs={crumbs}
+        kicker="Contact"
+        title="Talk to the showroom."
+        lead="Sales and service run from two locations on NH 16. Call for an instant answer on price and availability, or send your requirement on WhatsApp and we will reply with a written quote."
+      >
+        <div className="flex flex-wrap gap-3">
+          <Button href={telHref}>Call {site.phoneDisplay}</Button>
+          <Button
+            href={whatsappHref("Hi, I would like to know the current Volkswagen offers in Bhubaneswar.")}
+            variant="whatsapp"
+          >
+            WhatsApp us
+          </Button>
         </div>
+      </PageHero>
 
-        <div id="enquiry" className="scroll-mt-24">
-          <LeadForm
-            source="contact-page"
-            heading="Send us your requirement"
-            subheading="Fill this and our consultant will call you back, usually within the hour during working hours."
-            ctaLabel="Request a callback"
-          />
+      <section className="band">
+        <div className="shell grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(400px,0.9fr)] lg:gap-20">
+          <div>
+            <div className="grid gap-px border border-hairline bg-hairline">
+              {locations.map((location) => (
+                <Reveal key={location.id} className="bg-white p-8 lg:p-10">
+                  <p className="kicker">{location.kind}</p>
+                  <h2 className="mt-5 text-title font-light">{location.name}</h2>
+                  <address className="mt-5 not-italic text-base leading-relaxed text-ink-soft">
+                    {location.street}
+                    <br />
+                    {location.locality}, {location.region} {location.postalCode}
+                  </address>
+                  <dl className="mt-6 grid gap-2 border-t border-hairline pt-6 text-sm">
+                    {location.hours.map((slot) => (
+                      <div key={slot.days} className="flex justify-between gap-6">
+                        <dt className="text-ink-soft">{slot.days}</dt>
+                        <dd className="text-vw-blue">{slot.time}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+                    <a href={`tel:${location.phone}`} className="arrow-link text-sm">
+                      {location.phoneDisplay} <Arrow />
+                    </a>
+                    <a href={location.mapsUrl} target="_blank" rel="noopener" className="arrow-link text-sm">
+                      Directions <Arrow />
+                    </a>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={100} className="mt-6 border border-hairline">
+              <iframe
+                title="Volkswagen Bhubaneswar sales showroom at Pahal, NH 16"
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(site.mapEmbedQuery)}&output=embed`}
+                className="h-[360px] w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </Reveal>
+
+            <p className="mt-6 text-sm text-ink-soft">
+              For corporate and fleet enquiries, email{" "}
+              <a href={`mailto:${site.email}`} className="font-medium text-vw-blue underline underline-offset-4">
+                {site.email}
+              </a>
+              .
+            </p>
+          </div>
+
+          <Reveal delay={120} id="enquiry">
+            <LeadForm
+              source="contact-page"
+              heading="Request a callback"
+              subheading="Fill this and a Brand Advisor will call you back, usually within the hour during working hours."
+              ctaLabel="Request a callback"
+            />
+          </Reveal>
         </div>
       </section>
 
-      <section className="bg-vw-grey py-14">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Visiting us"
+      <section className="band-tight bg-mist">
+        <div className="shell">
+          <SectionHeader
+            kicker="Visiting us"
             title="Planning a showroom visit?"
-            subtitle="Call ahead and we will keep the variant and colour you want ready for a walkaround, so your visit is not wasted."
+            lead="Call ahead and we will keep the variant and colour you want ready for a walkaround, so the trip is not wasted."
           />
         </div>
       </section>

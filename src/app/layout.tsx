@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import Analytics from "@/components/Analytics";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/data/site";
@@ -12,11 +12,11 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const manrope = Manrope({
+const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
-  weight: ["600", "700", "800"],
-  variable: "--font-manrope",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-outfit",
 });
 
 export const metadata: Metadata = {
@@ -54,7 +54,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${manrope.variable}`}>
+    <html lang="en-IN" className={`${inter.variable} ${outfit.variable}`}>
       <body className="antialiased">
         <JsonLd data={[autoDealerSchema(), websiteSchema()]} />
         {children}

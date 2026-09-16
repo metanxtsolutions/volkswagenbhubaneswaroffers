@@ -39,7 +39,7 @@ export const campaigns: Campaign[] = [
     headline: "Volkswagen offers in Bhubaneswar, ending this month",
     subheadline:
       "Cash discount up to Rs 1,00,000, exchange bonus up to Rs 40,000 and EMI from Rs 16,999. Get your price in 2 minutes.",
-    offerStrip: "Limited period benefits on Tera, Taigun and Virtus",
+    offerStrip: "Limited period benefits on Taigun, Virtus and Tayron R-Line",
     points: [
       "Best price of the month, in writing",
       "Free home test drive across Bhubaneswar and Cuttack",
@@ -52,35 +52,35 @@ export const campaigns: Campaign[] = [
     faqs: commonFaqs,
     metaTitle: "Volkswagen Offers in Bhubaneswar | Get the Best Price Today",
     metaDescription:
-      "Limited period Volkswagen offers in Bhubaneswar. Cash discount, exchange bonus and low EMI on Tera, Taigun and Virtus. Book a free home test drive.",
+      "Limited period Volkswagen offers in Bhubaneswar. Cash discount, exchange bonus and low EMI on the Taigun, Virtus and Tayron R-Line. Book a free home test drive.",
   },
   {
-    slug: "tera",
-    modelSlug: "volkswagen-tera",
-    adGroup: "Tera",
-    headline: "Volkswagen Tera from Rs 9.49 Lakh in Bhubaneswar",
+    slug: "tayron",
+    modelSlug: "volkswagen-tayron-r-line",
+    adGroup: "Tayron R-Line",
+    headline: "Volkswagen Tayron R-Line in Bhubaneswar",
     subheadline:
-      "The new compact SUV with a 1.0 TSI turbo petrol engine and six airbags as standard. Launch benefits running now.",
-    offerStrip: "Launch offer with low down payment and exchange bonus",
+      "The locally assembled 5 and 7 seat SUV with 204 PS, 4MOTION all wheel drive and Level 2 driver assistance.",
+    offerStrip: "Introductory pricing with corporate and loyalty benefits",
     points: [
-      "Six airbags and ESC from the base variant",
-      "1.0 TSI turbo petrol, up to 19.2 kmpl",
-      "EMI from Rs 16,999 per month",
-      "Free home test drive, no obligation",
+      "Choose a 5 or 7 seat layout at booking",
+      "2.0 TSI with 204 PS and 4MOTION all wheel drive",
+      "IQ.DRIVE Level 2 ADAS with adaptive cruise",
+      "Home demonstration anywhere in Bhubaneswar",
     ],
-    formHeading: "Book your Tera test drive",
-    formSub: "Share your details for the launch offer, on road price and delivery timeline.",
-    ctaLabel: "Get Tera offer",
+    formHeading: "Request a Tayron demonstration",
+    formSub: "A senior Brand Advisor will call you with pricing, allocation and finance options.",
+    ctaLabel: "Request a callback",
     faqs: [
       {
-        q: "What is the Volkswagen Tera on road price in Bhubaneswar?",
-        a: "The Tera starts from about Rs 9.49 Lakh ex showroom. The on road price adds Odisha road tax, registration and insurance. Submit the form and we will send the exact figure for the variant you want.",
+        q: "What is the Volkswagen Tayron R-Line price in Bhubaneswar?",
+        a: "The Tayron R-Line starts from about Rs 46.99 Lakh ex showroom as an introductory price. The on road figure adds Odisha road tax, registration and insurance. Submit the form and we will send the full written breakup.",
       },
       ...commonFaqs,
     ],
-    metaTitle: "Volkswagen Tera Price in Bhubaneswar | Launch Offer and Test Drive",
+    metaTitle: "Volkswagen Tayron R-Line Price in Bhubaneswar | Book a Demonstration",
     metaDescription:
-      "Volkswagen Tera from Rs 9.49 Lakh in Bhubaneswar. Six airbags standard, 1.0 TSI turbo petrol, EMI from Rs 16,999. Book a free home test drive today.",
+      "Volkswagen Tayron R-Line in Bhubaneswar. 204 PS, 4MOTION all wheel drive, 5 and 7 seat layouts and Level 2 ADAS. Request a demonstration and price quote.",
   },
   {
     slug: "taigun",
@@ -213,7 +213,7 @@ export const campaigns: Campaign[] = [
     faqs: commonFaqs,
     metaTitle: "Free Volkswagen Test Drive in Bhubaneswar | Book at Home",
     metaDescription:
-      "Book a free Volkswagen home test drive in Bhubaneswar and Cuttack. Tera, Taigun, Virtus, Tiguan R-Line and Golf GTI. No cost, no obligation.",
+      "Book a free Volkswagen home test drive in Bhubaneswar and Cuttack. Taigun, Virtus, Tayron R-Line, Tiguan R-Line and Golf GTI. No cost, no obligation.",
   },
 ];
 

@@ -47,8 +47,8 @@ export const cities: City[] = [
     intro:
       "Cuttack buyers are a big part of our monthly deliveries. The Bhubaneswar to Cuttack corridor is a 45 minute drive, so a test drive at your doorstep is easy to arrange.",
     note:
-      "Between the narrow lanes near College Square and the open Ring Road, Cuttack owners tell us they want a car that is compact outside but strong on the highway. The Tera and the Taigun both fit that brief, and we deliver to Link Road and Bidanasi addresses regularly.",
-    popularModel: "volkswagen-tera",
+      "Between the narrow lanes near College Square and the open Ring Road, Cuttack owners tell us they want a car that is compact outside but strong on the highway. The Taigun fits that brief exactly, and we deliver to Link Road and Bidanasi addresses regularly.",
+    popularModel: "volkswagen-taigun",
   },
   {
     slug: "puri",
@@ -79,8 +79,8 @@ export const cities: City[] = [
     intro:
       "Khordha sits on the main highway to Bhubaneswar, which makes showroom visits and service trips simple for buyers from the district.",
     note:
-      "Most Khordha enquiries are for first time buyers moving up to a turbo petrol car. The Tera at an entry ex showroom price close to Rs 9.49 Lakh is usually the starting point of that conversation.",
-    popularModel: "volkswagen-tera",
+      "Most Khordha enquiries are for first time buyers moving up to a turbo petrol car. The Taigun, from an ex showroom price close to Rs 10.99 Lakh, is usually where that conversation starts.",
+    popularModel: "volkswagen-taigun",
   },
   {
     slug: "jatni",
@@ -96,7 +96,7 @@ export const cities: City[] = [
       "Jatni is a short drive from our Bhubaneswar showroom, so test drives here are usually arranged the same day.",
     note:
       "With the IIT Bhubaneswar campus at Argul and steady residential growth, Jatni has a young buyer base. Low EMI plans and first time buyer finance are the two things people ask us about most from this area.",
-    popularModel: "volkswagen-tera",
+    popularModel: "volkswagen-taigun",
   },
   {
     slug: "konark",
@@ -127,7 +127,7 @@ export const cities: City[] = [
     intro:
       "Nayagarh buyers get the same offers as Bhubaneswar customers, with delivery arranged to your town.",
     note:
-      "Roads towards Satkosia and Ranpur have their share of rough patches, so ground clearance matters here. The Taigun with 188 mm of clearance and the Tera with 189 mm both handle these routes without any drama.",
+      "Roads towards Satkosia and Ranpur have their share of rough patches, so ground clearance matters here. The Taigun, with 188 mm of clearance and a body tuned for Indian surfaces, handles these routes without drama.",
     popularModel: "volkswagen-taigun",
   },
   {
@@ -176,7 +176,7 @@ export const cities: City[] = [
       "We arrange test drives and doorstep delivery in Kendrapara through our Bhubaneswar team.",
     note:
       "Coastal humidity and salt air make anti corrosion treatment a genuine requirement here, not an upsell. Volkswagen uses galvanised steel on the body panels, which is a real advantage for owners in this district.",
-    popularModel: "volkswagen-tera",
+    popularModel: "volkswagen-taigun",
   },
   {
     slug: "jagatsinghpur",
@@ -240,7 +240,7 @@ export const cities: City[] = [
       "Talcher customers can complete the entire purchase remotely, from booking to finance, with delivery arranged locally.",
     note:
       "Dust is a daily reality on the roads around the coalfields, so cabin air quality and filter service matter. We explain the service package options clearly so there are no surprises at the first paid service.",
-    popularModel: "volkswagen-tera",
+    popularModel: "volkswagen-taigun",
   },
   {
     slug: "bhadrak",
@@ -368,7 +368,7 @@ export const cities: City[] = [
       "Rayagada enquiries are handled by a dedicated consultant from our Bhubaneswar showroom.",
     note:
       "The ghat roads in this region reward a car with strong turbo torque and good brakes. The 1.0 TSI delivers peak torque low in the rev range, which makes hill climbs easy even with a full car.",
-    popularModel: "volkswagen-tera",
+    popularModel: "volkswagen-taigun",
   },
 ];
 

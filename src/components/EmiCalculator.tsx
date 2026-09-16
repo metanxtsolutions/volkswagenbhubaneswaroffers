@@ -27,22 +27,22 @@ export default function EmiCalculator({ defaultPrice = 1170000 }: { defaultPrice
     };
   }, [price, downPct, rate, years]);
 
-  const label = "mb-2 block text-sm font-semibold text-vw-blue";
-  const range = "h-2 w-full cursor-pointer appearance-none rounded-full bg-vw-line accent-vw-cyan";
+  const label = "mb-3 block text-sm text-ink-soft";
+  const range = "h-1 w-full cursor-pointer appearance-none rounded-full bg-hairline accent-vw-blue";
 
   return (
-    <div className="grid gap-6 rounded-2xl border border-vw-line bg-white p-6 shadow-sm lg:grid-cols-5 lg:p-8">
-      <div className="lg:col-span-3">
-        <div className="mb-5 flex flex-wrap gap-2">
+    <div className="grid gap-px border border-hairline bg-hairline lg:grid-cols-5">
+      <div className="bg-white p-8 lg:col-span-3 lg:p-10">
+        <div className="mb-8 flex flex-wrap gap-2">
           {models.map((model) => (
             <button
               key={model.slug}
               type="button"
               onClick={() => setPrice(model.priceFromValue)}
-              className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition ${
+              className={`border px-4 py-2 text-xs transition-colors ${
                 price === model.priceFromValue
-                  ? "border-vw-cyan bg-vw-cyan text-vw-blue"
-                  : "border-vw-line text-slate-600 hover:border-vw-cyan"
+                  ? "border-vw-blue bg-vw-blue text-white"
+                  : "border-hairline text-ink-soft hover:border-vw-blue"
               }`}
             >
               {model.name}
@@ -118,26 +118,26 @@ export default function EmiCalculator({ defaultPrice = 1170000 }: { defaultPrice
         </div>
       </div>
 
-      <div className="flex flex-col justify-between rounded-xl bg-vw-blue p-6 text-white lg:col-span-2">
+      <div className="flex flex-col justify-between bg-vw-blue p-8 text-white lg:col-span-2 lg:p-10">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-vw-cyan">Your monthly EMI</p>
-          <p className="mt-2 text-4xl font-extrabold">Rs {inr.format(emi)}</p>
+          <p className="text-[11px] uppercase tracking-[0.14em] text-vw-cyan">Your monthly EMI</p>
+          <p className="mt-4 font-display text-5xl font-extralight">Rs {inr.format(emi)}</p>
           <dl className="mt-6 grid gap-3 text-sm">
             <div className="flex justify-between border-b border-white/15 pb-2">
-              <dt className="text-slate-300">Loan amount</dt>
-              <dd className="font-semibold">Rs {inr.format(loan)}</dd>
+              <dt className="text-white/60">Loan amount</dt>
+              <dd className="font-display font-light">Rs {inr.format(loan)}</dd>
             </div>
             <div className="flex justify-between border-b border-white/15 pb-2">
-              <dt className="text-slate-300">Total interest</dt>
-              <dd className="font-semibold">Rs {inr.format(totalInterest)}</dd>
+              <dt className="text-white/60">Total interest</dt>
+              <dd className="font-display font-light">Rs {inr.format(totalInterest)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-slate-300">Total payable</dt>
-              <dd className="font-semibold">Rs {inr.format(totalPayable)}</dd>
+              <dt className="text-white/60">Total payable</dt>
+              <dd className="font-display font-light">Rs {inr.format(totalPayable)}</dd>
             </div>
           </dl>
         </div>
-        <p className="mt-6 text-[11px] leading-relaxed text-slate-400">
+        <p className="mt-8 text-[11px] leading-relaxed text-white/45">
           Indicative figures on ex showroom price. Your final EMI depends on the on road price, the approved rate and
           the processing charges of your bank.
         </p>

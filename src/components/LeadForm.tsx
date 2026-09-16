@@ -74,24 +74,24 @@ export default function LeadForm({
       lead?.model || "Volkswagen range"
     } on your website. Please share the best offer.`;
     return (
-      <div className="rounded-2xl border border-vw-line bg-white p-6 text-center shadow-[var(--shadow-form)] sm:p-8">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-3xl">
+      <div className="border border-hairline bg-white p-8 text-center sm:p-10">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-vw-cyan/40 bg-vw-cyan/10 text-2xl text-vw-cyan-deep">
           <span aria-hidden>✓</span>
         </div>
-        <h3 className="mt-4 text-xl font-bold text-vw-blue">Thank you, we have your details</h3>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">
+        <h3 className="mt-6 text-title font-light text-vw-blue">Thank you, we have your details</h3>
+        <p className="mt-3 text-sm leading-relaxed text-ink-soft">
           Our sales consultant will call you shortly with the running offer and the full on road price. For a faster
           reply, message us on WhatsApp now.
         </p>
         <a
           href={whatsappHref(message)}
-          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-semibold text-white transition hover:bg-[#1eb457]"
+          className="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-[#25d366] px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-[#1eb457]"
         >
           Continue on WhatsApp
         </a>
-        <p className="mt-3 text-sm text-slate-500">
+        <p className="mt-4 text-sm text-ink-soft">
           or call{" "}
-          <a href={`tel:${site.phone}`} className="font-semibold text-vw-blue underline">
+          <a href={`tel:${site.phone}`} className="font-medium text-vw-blue underline underline-offset-4">
             {site.phoneDisplay}
           </a>
         </p>
@@ -100,17 +100,17 @@ export default function LeadForm({
   }
 
   const fieldClass =
-    "w-full rounded-xl border border-vw-line bg-white px-4 py-3 text-[15px] text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-vw-cyan focus:ring-2 focus:ring-vw-cyan/30";
+    "w-full border border-hairline bg-white px-4 py-3.5 text-[15px] text-ink outline-none transition-colors placeholder:text-ink-faint focus:border-vw-blue";
 
   return (
     <form
       onSubmit={onSubmit}
-      className={`rounded-2xl border border-vw-line bg-white shadow-[var(--shadow-form)] ${compact ? "p-5" : "p-6 sm:p-7"}`}
+      className={`border border-hairline bg-white ${compact ? "p-6" : "p-7 sm:p-9"}`}
       noValidate
     >
       <div className="mb-5">
-        <h3 className="text-xl font-extrabold leading-tight tracking-tight text-vw-blue sm:text-[26px]">{heading}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-ink-soft">{subheading}</p>
+        <h3 className="text-title font-light text-vw-blue">{heading}</h3>
+        <p className="mt-3 text-sm leading-relaxed text-ink-soft">{subheading}</p>
       </div>
 
       <div className="grid gap-3">
@@ -133,8 +133,8 @@ export default function LeadForm({
           <label htmlFor={`phone-${source}`} className="sr-only">
             Mobile number
           </label>
-          <div className="flex items-stretch overflow-hidden rounded-xl border border-vw-line focus-within:border-vw-cyan focus-within:ring-2 focus-within:ring-vw-cyan/30">
-            <span className="flex items-center bg-vw-grey px-3 text-[15px] font-semibold text-slate-600">+91</span>
+          <div className="flex items-stretch border border-hairline transition-colors focus-within:border-vw-blue">
+            <span className="flex items-center border-r border-hairline bg-mist px-3.5 text-[15px] text-ink-soft">+91</span>
             <input
               id={`phone-${source}`}
               name="phone"
@@ -144,7 +144,7 @@ export default function LeadForm({
               maxLength={10}
               required
               placeholder="10 digit mobile number"
-              className="w-full px-4 py-3 text-[15px] text-slate-900 outline-none placeholder:text-slate-400"
+              className="w-full px-4 py-3.5 text-[15px] text-ink outline-none placeholder:text-ink-faint"
             />
           </div>
         </div>
@@ -208,18 +208,18 @@ export default function LeadForm({
         <button
           type="submit"
           disabled={status === "sending"}
-          className="mt-1 w-full rounded-xl bg-vw-cyan px-6 py-4 text-base font-bold text-vw-blue shadow-sm transition hover:bg-vw-blue hover:text-white hover:shadow-lg disabled:opacity-70"
+          className="mt-2 w-full rounded-full bg-vw-blue px-6 py-4 text-[15px] font-medium text-white transition-colors duration-300 hover:bg-vw-blue-soft disabled:opacity-60"
         >
           {status === "sending" ? "Sending..." : ctaLabel}
         </button>
 
         {status === "error" ? (
-          <p role="alert" className="text-sm font-medium text-red-600">
+          <p role="alert" className="text-sm text-red-600">
             {error}
           </p>
         ) : null}
 
-        <p className="text-center text-xs leading-relaxed text-slate-500">
+        <p className="text-center text-xs leading-relaxed text-ink-faint">
           By submitting this form you agree to be contacted by our sales team on call, SMS and WhatsApp. Your details
           are never sold or shared.
         </p>

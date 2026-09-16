@@ -1,31 +1,38 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
-import CtaBand from "@/components/CtaBand";
+import Button from "@/components/Button";
 import JsonLd from "@/components/JsonLd";
 import LeadForm from "@/components/LeadForm";
-import SectionHeading from "@/components/SectionHeading";
-import { modelBySlug } from "@/data/models";
-import { site } from "@/data/site";
+import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
+import SectionHeader from "@/components/SectionHeader";
+import { modelBySlug, models } from "@/data/models";
+import { site, telHref, whatsappHref } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Book a Free Volkswagen Test Drive in Bhubaneswar",
   description:
-    "Book a free Volkswagen home test drive in Bhubaneswar and Cuttack. Choose Tera, Taigun, Virtus, Tiguan R-Line or Golf GTI and we bring the car to your home or office.",
+    "Book a free Volkswagen test drive in Bhubaneswar and Cuttack. Taigun, Virtus, Tayron R-Line, Tiguan R-Line and Golf GTI, brought to your home or office at a time that suits you.",
   path: "/book-test-drive",
-  keywords: ["volkswagen test drive bhubaneswar", "book test drive taigun", "volkswagen home test drive odisha"],
+  keywords: [
+    "volkswagen test drive bhubaneswar",
+    "book taigun test drive odisha",
+    "volkswagen home test drive",
+  ],
 });
 
 const crumbs = [
   { name: "Home", path: "/" },
-  { name: "Book a test drive", path: "/book-test-drive" },
+  { name: "Test drive", path: "/book-test-drive" },
 ];
 
-const points = [
-  "Completely free, with no obligation to buy",
-  "At your home, your office or our showroom",
-  "A trained product expert rides along and answers everything",
-  "Available seven days a week from 9:30 am to 7:30 pm",
+const checks = [
+  { title: "Low speed drivability", detail: "Take it through traffic and feel how the turbo responds from low revs, especially with an automatic." },
+  { title: "Ride over broken road", detail: "Find a rough patch. A Volkswagen is firm, but it should stay composed and quiet over it." },
+  { title: "Highway stability", detail: "Get to 80 or 100 kmph on a clear stretch and notice how planted the car stays." },
+  { title: "Rear seat comfort", detail: "Sit in the back for a few minutes. Knee room, under thigh support, air conditioning flow." },
+  { title: "Visibility and parking", detail: "Try a tight spot and judge the camera, the sensors and the view over the bonnet." },
+  { title: "Boot and storage", detail: "Open the boot with your usual luggage in mind, and check the cabin storage for daily items." },
 ];
 
 export default async function TestDrivePage({
@@ -39,103 +46,110 @@ export default async function TestDrivePage({
   return (
     <>
       <JsonLd data={breadcrumbSchema(crumbs)} />
-      <Breadcrumbs items={crumbs} />
 
-      <section className="container-page grid gap-10 py-10 lg:grid-cols-[1.05fr_minmax(340px,0.95fr)] lg:py-14">
-        <div>
-          <h1 className="text-3xl font-extrabold leading-tight text-vw-blue sm:text-4xl">
-            {model ? `Book a free ${model.fullName} test drive` : "Book a free Volkswagen test drive"}
-          </h1>
-          <p className="mt-5 text-base leading-relaxed text-slate-600 sm:text-lg">
-            You should never buy a car you have not driven. Pick a time, tell us where you are, and we will bring the
-            car to you anywhere in Bhubaneswar or Cuttack. For other towns in Odisha we plan the visit in advance so
-            the exact model you want is available.
-          </p>
+      <PageHero
+        tone="dark"
+        crumbs={crumbs}
+        kicker="Test drive"
+        title={model ? `Drive the ${model.fullName}.` : "Drive it before you decide."}
+        lead="Free, with no obligation. We bring the car to your home or office anywhere in Bhubaneswar and Cuttack, and a product expert rides along to answer everything."
+      >
+        <div className="flex flex-wrap gap-3">
+          <Button href="#book" variant="light">
+            Pick a slot
+          </Button>
+          <Button href={whatsappHref("Hi, I would like to book a Volkswagen test drive.")} variant="whatsapp">
+            Book on WhatsApp
+          </Button>
+        </div>
+      </PageHero>
 
-          <ul className="mt-8 grid gap-3">
-            {points.map((point) => (
-              <li key={point} className="flex items-start gap-3 rounded-xl border border-vw-line bg-white px-4 py-3">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-vw-cyan text-xs font-bold text-vw-blue">
-                  ✓
-                </span>
-                <span className="text-sm text-slate-700">{point}</span>
-              </li>
+      <section id="book" className="scroll-mt-24 band">
+        <div className="shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(400px,0.9fr)] lg:gap-20">
+          <div>
+            <SectionHeader
+              kicker="How it works"
+              title="Tell us where and when"
+              lead="Slots run seven days a week. For towns further from Bhubaneswar we plan the visit in advance so the exact model you want is the one that arrives."
+            />
+
+            <Reveal delay={80} className="mt-10 grid gap-px border border-hairline bg-hairline">
+              {[
+                "Completely free, with no obligation to buy",
+                "At your home, your office or our Pahal showroom",
+                "A trained product expert rides along",
+                "Free exchange valuation of your current car on the same visit",
+              ].map((point) => (
+                <p key={point} className="bg-white px-7 py-5 text-sm text-ink-soft">
+                  {point}
+                </p>
+              ))}
+            </Reveal>
+
+            <Reveal delay={140} className="mt-10 border border-hairline bg-mist p-8">
+              <h3 className="text-title font-light">What to bring</h3>
+              <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+                A valid driving licence is all you need. If you want your current car valued on the same visit, keep
+                the registration certificate handy and our evaluator will do it on the spot.
+              </p>
+              <p className="mt-6 text-sm text-ink-soft">
+                Prefer to talk first?{" "}
+                <a href={telHref} className="font-medium text-vw-blue underline underline-offset-4">
+                  {site.phoneDisplay}
+                </a>
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal delay={120}>
+            <LeadForm
+              source="test-drive-page"
+              defaultModel={model?.fullName ?? ""}
+              heading="Book your test drive"
+              subheading="Share your details and we will confirm the time and location with you."
+              ctaLabel="Request a slot"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="band bg-mist">
+        <div className="shell">
+          <SectionHeader
+            kicker="During the drive"
+            title="Six things worth checking"
+            lead="Twenty minutes behind the wheel tells you more than any brochure."
+          />
+          <div className="mt-14 grid gap-px border border-hairline bg-hairline md:grid-cols-2 xl:grid-cols-3">
+            {checks.map((item, index) => (
+              <Reveal key={item.title} delay={index * 60} className="bg-white p-8 lg:p-10">
+                <h3 className="text-title font-light">{item.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-ink-soft">{item.detail}</p>
+              </Reveal>
             ))}
-          </ul>
+          </div>
+        </div>
+      </section>
 
-          <div className="mt-8 rounded-2xl bg-vw-blue p-6 text-white">
-            <h2 className="text-lg font-bold">What to bring</h2>
-            <p className="mt-2 text-sm leading-relaxed text-slate-300">
-              A valid driving licence is all you need. If you want the exchange value of your current car checked on
-              the same visit, keep the registration certificate handy and our evaluator will do it on the spot.
-            </p>
-            <p className="mt-4 text-sm">
-              Prefer to talk first? Call{" "}
-              <a href={`tel:${site.phone}`} className="font-bold text-vw-cyan hover:underline">
-                {site.phoneDisplay}
+      <section className="band-tight border-t border-hairline">
+        <div className="shell">
+          <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-faint">Choose a model</h2>
+          <div className="mt-8 grid gap-px border border-hairline bg-hairline sm:grid-cols-2 xl:grid-cols-5">
+            {models.map((item) => (
+              <a
+                key={item.slug}
+                href={`/book-test-drive?model=${item.slug}`}
+                className={`bg-white p-6 transition-colors hover:bg-mist ${
+                  model?.slug === item.slug ? "bg-mist" : ""
+                }`}
+              >
+                <p className="text-[11px] uppercase tracking-[0.14em] text-ink-faint">{item.bodyType}</p>
+                <p className="mt-3 font-display text-base font-light text-vw-blue">{item.fullName}</p>
               </a>
-            </p>
-          </div>
-        </div>
-
-        <div id="enquiry" className="scroll-mt-24">
-          <LeadForm
-            source="test-drive-page"
-            defaultModel={model?.fullName ?? ""}
-            heading="Pick your test drive slot"
-            subheading="Share your details and our team will confirm the time and the location with you."
-            ctaLabel="Book my test drive"
-          />
-        </div>
-      </section>
-
-      <section className="bg-vw-grey py-16 sm:py-20">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="During the drive"
-            title="What to check on your test drive"
-            subtitle="Twenty minutes behind the wheel tells you more than any brochure."
-          />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Low speed drivability",
-                detail: "Drive through traffic and feel how the turbo responds from low revs, especially with an automatic.",
-              },
-              {
-                title: "Ride over rough roads",
-                detail: "Find a broken patch. Volkswagen suspension is firm but it should stay composed and quiet.",
-              },
-              {
-                title: "Highway stability",
-                detail: "Take it to 80 or 100 kmph on a clear stretch and notice how planted the car stays.",
-              },
-              {
-                title: "Rear seat comfort",
-                detail: "Sit in the back for a few minutes. Check knee room, under thigh support and air conditioning flow.",
-              },
-              {
-                title: "Visibility and parking",
-                detail: "Try a tight parking spot and judge the camera, the sensors and the view over the bonnet.",
-              },
-              {
-                title: "Boot and storage",
-                detail: "Open the boot with your usual luggage in mind and check the cabin storage for daily items.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-vw-line bg-white p-6">
-                <h3 className="text-base font-bold text-vw-blue">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.detail}</p>
-              </div>
             ))}
           </div>
         </div>
       </section>
-
-      <CtaBand
-        title="Prefer to book over a call?"
-        whatsappMessage="Hi, I want to book a Volkswagen test drive in Bhubaneswar."
-      />
     </>
   );
 }

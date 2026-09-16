@@ -1,12 +1,19 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
+import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
 import { site } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Terms of Use",
-  description: "Terms that apply to the use of the Volkswagen Bhubaneswar Offers website.",
+  title: "Terms of Use | Volkswagen Bhubaneswar",
+  description:
+    "Terms that apply to the use of the Volkswagen Bhubaneswar dealership website, including pricing, product information and trademarks.",
   path: "/terms",
 });
+
+const crumbs = [
+  { name: "Home", path: "/" },
+  { name: "Terms of use", path: "/terms" },
+];
 
 const sections = [
   {
@@ -42,26 +49,19 @@ const sections = [
 export default function TermsPage() {
   return (
     <>
-      <Breadcrumbs
-        items={[
-          { name: "Home", path: "/" },
-          { name: "Terms of use", path: "/terms" },
-        ]}
-      />
-      <section className="container-page max-w-3xl py-10 sm:py-14">
-        <h1 className="text-3xl font-extrabold text-vw-blue sm:text-4xl">Terms of use</h1>
-        <p className="mt-4 text-sm text-slate-500">Last updated: January 2026</p>
-        <p className="mt-6 text-base leading-relaxed text-slate-600">
-          By using {site.url.replace("https://", "")} you agree to the terms below.
-        </p>
+      <PageHero crumbs={crumbs} kicker="Legal" title="Terms of use" lead="The terms that apply when you use this website." />
 
-        <div className="mt-10 grid gap-8">
-          {sections.map((section) => (
-            <div key={section.title}>
-              <h2 className="text-xl font-bold text-vw-blue">{section.title}</h2>
-              <p className="mt-3 text-base leading-relaxed text-slate-600">{section.body}</p>
-            </div>
-          ))}
+      <section className="band">
+        <div className="shell max-w-3xl">
+          <p className="text-xs text-ink-faint">Last updated: September 2026</p>
+          <div className="mt-12 grid gap-12">
+            {sections.map((section) => (
+              <Reveal key={section.title}>
+                <h2 className="text-title font-light">{section.title}</h2>
+                <p className="mt-4 text-base leading-relaxed text-ink-soft">{section.body}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
     </>

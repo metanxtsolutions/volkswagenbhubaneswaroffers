@@ -1,9 +1,10 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
-import CtaBand from "@/components/CtaBand";
+import Button from "@/components/Button";
 import Faqs from "@/components/Faqs";
 import JsonLd from "@/components/JsonLd";
 import LeadForm from "@/components/LeadForm";
-import SectionHeading from "@/components/SectionHeading";
+import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
+import SectionHeader from "@/components/SectionHeader";
 import { models } from "@/data/models";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
@@ -79,7 +80,6 @@ export default function OnRoadPricePage() {
   return (
     <>
       <JsonLd data={[breadcrumbSchema(crumbs), faqSchema(priceFaqs)]} />
-      <Breadcrumbs items={crumbs} />
 
       <section className="container-page grid gap-10 py-10 lg:grid-cols-[1.05fr_minmax(340px,0.95fr)] lg:py-14">
         <div>
@@ -112,27 +112,27 @@ export default function OnRoadPricePage() {
         </div>
       </section>
 
-      <section className="bg-vw-grey py-16 sm:py-20">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Starting points"
+      <section className="band bg-mist">
+        <div className="shell">
+          <SectionHeader
+            kicker="Starting points"
             title="Ex showroom prices in Bhubaneswar"
-            subtitle="Indicative starting prices. The on road figure is calculated on the exact variant you select."
+            lead="Indicative starting prices. The on road figure is calculated on the exact variant you select."
           />
-          <div className="mt-10 overflow-x-auto rounded-2xl border border-vw-line bg-white">
+          <div className="mt-14 overflow-x-auto border border-hairline bg-white">
             <table className="w-full min-w-[620px] text-left text-sm">
-              <thead className="bg-vw-blue text-white">
-                <tr>
-                  <th scope="col" className="px-5 py-4 font-semibold">Model</th>
-                  <th scope="col" className="px-5 py-4 font-semibold">Ex showroom from</th>
-                  <th scope="col" className="px-5 py-4 font-semibold">Ex showroom up to</th>
-                  <th scope="col" className="px-5 py-4 font-semibold">EMI from</th>
+              <thead>
+                <tr className="border-b border-hairline">
+                  <th scope="col" className="px-6 py-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">Model</th>
+                  <th scope="col" className="px-6 py-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">Ex showroom from</th>
+                  <th scope="col" className="px-6 py-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">Ex showroom up to</th>
+                  <th scope="col" className="px-6 py-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">EMI from</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-vw-line">
+              <tbody>
                 {models.map((model) => (
-                  <tr key={model.slug}>
-                    <th scope="row" className="px-5 py-4 font-bold text-vw-blue">{model.fullName}</th>
+                  <tr key={model.slug} className="border-b border-hairline last:border-b-0">
+                    <th scope="row" className="px-6 py-6 font-display text-base font-normal text-vw-blue">{model.fullName}</th>
                     <td className="px-5 py-4 text-slate-600">{model.priceFrom}</td>
                     <td className="px-5 py-4 text-slate-600">{model.priceTo}</td>
                     <td className="px-5 py-4 text-slate-600">{model.emiFrom} per month</td>
@@ -141,19 +141,15 @@ export default function OnRoadPricePage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-4 text-xs text-slate-500">
+          <p className="mt-5 text-xs text-ink-faint">
             Prices are indicative, apply to Bhubaneswar and can change without notice. Confirm the live price with our
             team before booking.
           </p>
         </div>
       </section>
 
-      <Faqs faqs={priceFaqs} title="On road price questions" eyebrow="Pricing" />
+      <Faqs faqs={priceFaqs} title="On road price questions" kicker="Pricing" tone="mist" />
 
-      <CtaBand
-        title="Want the exact number for your variant?"
-        whatsappMessage="Hi, please send me the full on road price breakup for a Volkswagen in Bhubaneswar."
-      />
     </>
   );
 }

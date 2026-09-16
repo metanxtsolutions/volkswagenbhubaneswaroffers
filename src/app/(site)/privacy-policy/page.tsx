@@ -1,13 +1,19 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
+import PageHero from "@/components/PageHero";
+import Reveal from "@/components/Reveal";
 import { site } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Privacy Policy",
+  title: "Privacy Policy | Volkswagen Bhubaneswar",
   description:
-    "How Volkswagen Bhubaneswar Offers collects, uses and protects the personal information you share through this website.",
+    "How Volkswagen Bhubaneswar collects, uses and protects the personal information you share through this website.",
   path: "/privacy-policy",
 });
+
+const crumbs = [
+  { name: "Home", path: "/" },
+  { name: "Privacy policy", path: "/privacy-policy" },
+];
 
 const sections = [
   {
@@ -43,41 +49,33 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <>
-      <Breadcrumbs
-        items={[
-          { name: "Home", path: "/" },
-          { name: "Privacy policy", path: "/privacy-policy" },
-        ]}
-      />
-      <section className="container-page max-w-3xl py-10 sm:py-14">
-        <h1 className="text-3xl font-extrabold text-vw-blue sm:text-4xl">Privacy policy</h1>
-        <p className="mt-4 text-sm text-slate-500">Last updated: January 2026</p>
-        <p className="mt-6 text-base leading-relaxed text-slate-600">
-          This policy explains how {site.name} handles the information you share with us through this website, by
-          phone, on WhatsApp or by email.
-        </p>
+      <PageHero crumbs={crumbs} kicker="Legal" title="Privacy policy" lead="How we handle the information you share with us through this website, by phone, on WhatsApp or by email." />
 
-        <div className="mt-10 grid gap-8">
-          {sections.map((section) => (
-            <div key={section.title}>
-              <h2 className="text-xl font-bold text-vw-blue">{section.title}</h2>
-              <p className="mt-3 text-base leading-relaxed text-slate-600">{section.body}</p>
-            </div>
-          ))}
+      <section className="band">
+        <div className="shell max-w-3xl">
+          <p className="text-xs text-ink-faint">Last updated: September 2026</p>
+          <div className="mt-12 grid gap-12">
+            {sections.map((section) => (
+              <Reveal key={section.title}>
+                <h2 className="text-title font-light">{section.title}</h2>
+                <p className="mt-4 text-base leading-relaxed text-ink-soft">{section.body}</p>
+              </Reveal>
+            ))}
 
           <div>
-            <h2 className="text-xl font-bold text-vw-blue">Contact us about privacy</h2>
-            <p className="mt-3 text-base leading-relaxed text-slate-600">
+            <h2 className="text-title font-light">Contact us about privacy</h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-soft">
               Email{" "}
-              <a href={`mailto:${site.email}`} className="font-semibold text-vw-cyan-dark underline">
+              <a href={`mailto:${site.email}`} className="font-medium text-vw-blue underline underline-offset-4">
                 {site.email}
               </a>{" "}
               or call{" "}
-              <a href={`tel:${site.phone}`} className="font-semibold text-vw-cyan-dark underline">
+              <a href={`tel:${site.phone}`} className="font-medium text-vw-blue underline underline-offset-4">
                 {site.phoneDisplay}
               </a>
               . We respond to privacy requests within a reasonable period.
             </p>
+          </div>
           </div>
         </div>
       </section>

@@ -6,7 +6,7 @@ const EXTENSIONS = ["webp", "avif", "jpg", "jpeg", "png"];
 /**
  * Looks for official vehicle photography in public/models.
  *
- * Drop a file named after the model slug, for example
+ * See docs/vehicle-images.md. Drop a file named after the model slug, for example
  * public/models/volkswagen-taigun.webp, and every card, model page and ad
  * landing page starts using it. No code change needed. Until a file exists
  * the site falls back to the vector illustration.

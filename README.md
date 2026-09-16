@@ -125,7 +125,7 @@ when the ads variables are set, and `Lead` for the Meta Pixel.
       permission based customer feedback.
 - [ ] Add official vehicle photography. Drop the files into `public/models`
       named after each model slug and they are used automatically. See
-      `public/models/README.md`.
+      `docs/vehicle-images.md`.
 - [ ] Set `LEAD_WEBHOOK_URL` and test one lead end to end.
 - [ ] Add GA4, Google Ads and Search Console variables, then verify the
       conversion fires with Google Tag Assistant.
@@ -141,7 +141,7 @@ Official images go in `public/models`, named after the model slug, for example
 switches that model from the vector illustration to an optimised `next/image`
 with AVIF and WebP variants. Models without a file keep the illustration, so
 the set can be filled in one model at a time. Full notes are in
-`public/models/README.md`.
+`docs/vehicle-images.md`.
 
 ## Refreshing the monthly scheme
 

@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Only needed when a model in src/data/models.ts sets an absolute
+    // imageUrl. Local files in public/models are always preferred.
+    remotePatterns: [
+      { protocol: "https", hostname: "www.volkswagen.co.in" },
+      { protocol: "https", hostname: "volkswagen.co.in" },
+    ],
   },
   async redirects() {
     return [

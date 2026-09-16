@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import CarArt from "@/components/CarArt";
+import ModelVisual from "@/components/ModelVisual";
 import Faqs from "@/components/Faqs";
 import JsonLd from "@/components/JsonLd";
 import LeadForm from "@/components/LeadForm";
@@ -34,9 +34,6 @@ export async function generateMetadata({ params }: Params) {
     noindex: true,
   });
 }
-
-const shapeFor = (bodyType: string) =>
-  bodyType.toLowerCase().includes("sedan") ? "sedan" : bodyType.toLowerCase().includes("hatch") ? "hatch" : "suv";
 
 export default async function LandingPage({ params }: Params) {
   const { campaign: slug } = await params;
@@ -77,7 +74,7 @@ export default async function LandingPage({ params }: Params) {
 
             {model ? (
               <div className={`mt-8 hidden overflow-hidden rounded-2xl bg-gradient-to-br ${model.accent} p-4 lg:block`}>
-                <CarArt shape={shapeFor(model.bodyType)} label={model.fullName} className="mx-auto h-40 w-full max-w-sm" />
+                <ModelVisual model={model} priority className="mx-auto h-44 w-full max-w-md" sizes="(max-width: 1024px) 100vw, 480px" />
               </div>
             ) : null}
 

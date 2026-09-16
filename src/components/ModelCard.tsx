@@ -1,9 +1,6 @@
 import Link from "next/link";
-import CarArt from "./CarArt";
+import ModelVisual from "./ModelVisual";
 import type { Model } from "@/data/models";
-
-const shapeFor = (bodyType: string) =>
-  bodyType.toLowerCase().includes("sedan") ? "sedan" : bodyType.toLowerCase().includes("hatch") ? "hatch" : "suv";
 
 export default function ModelCard({ model }: { model: Model }) {
   return (
@@ -14,9 +11,8 @@ export default function ModelCard({ model }: { model: Model }) {
             {model.badge}
           </span>
         ) : null}
-        <CarArt
-          shape={shapeFor(model.bodyType)}
-          label={model.fullName}
+        <ModelVisual
+          model={model}
           className="mx-auto h-40 w-full max-w-[330px] transition duration-500 group-hover:scale-[1.04]"
         />
       </div>

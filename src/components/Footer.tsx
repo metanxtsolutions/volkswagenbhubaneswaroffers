@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cities } from "@/data/cities";
 import { models } from "@/data/models";
-import { site, telHref } from "@/data/site";
+import { locations, site } from "@/data/site";
 
 const quickLinks = [
   { label: "Current offers", href: "/offers" },
@@ -27,25 +27,35 @@ export default function Footer() {
             <span className="text-base font-bold text-white">Volkswagen Bhubaneswar Offers</span>
           </div>
           <p className="mt-4 text-sm leading-relaxed">
-            Book your Volkswagen in Bhubaneswar with the running month offer, transparent on road pricing and a free
-            home test drive anywhere in Odisha.
+            Authorised Volkswagen sales partner for Bhubaneswar and Odisha. Book with the running month offer,
+            transparent on road pricing and a free home test drive.
           </p>
-          <address className="mt-5 not-italic text-sm leading-relaxed">
-            {site.address.street}
-            <br />
-            {site.address.locality}, {site.address.region} {site.address.postalCode}
-          </address>
-          <p className="mt-4 text-sm">
-            <a href={telHref} className="font-bold text-vw-cyan hover:underline">
-              {site.phoneDisplay}
-            </a>
-            <br />
-            <a href={`mailto:${site.email}`} className="hover:underline">
+
+          <div className="mt-6 grid gap-5">
+            {locations.map((location) => (
+              <div key={location.id}>
+                <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-vw-cyan">{location.kind}</p>
+                <address className="mt-1.5 not-italic text-sm leading-relaxed">
+                  {location.street}
+                  <br />
+                  {location.locality}, {location.region} {location.postalCode}
+                </address>
+                <p className="mt-1.5 text-sm">
+                  <a href={`tel:${location.phone}`} className="font-bold text-white hover:text-vw-cyan">
+                    {location.phoneDisplay}
+                  </a>
+                </p>
+                <p className="mt-1 text-xs text-slate-400">
+                  {location.hours.map((slot) => `${slot.days}: ${slot.time}`).join(" | ")}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-5 text-sm">
+            <a href={`mailto:${site.email}`} className="hover:text-vw-cyan">
               {site.email}
             </a>
-          </p>
-          <p className="mt-3 text-sm">
-            Open {site.openingHours.days}, {site.openingHours.time}
           </p>
         </div>
 

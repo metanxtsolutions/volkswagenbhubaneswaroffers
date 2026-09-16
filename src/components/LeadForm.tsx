@@ -74,7 +74,7 @@ export default function LeadForm({
       lead?.model || "Volkswagen range"
     } on your website. Please share the best offer.`;
     return (
-      <div className="rounded-2xl border border-vw-line bg-white p-6 text-center shadow-xl sm:p-8">
+      <div className="rounded-2xl border border-vw-line bg-white p-6 text-center shadow-[var(--shadow-form)] sm:p-8">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-3xl">
           <span aria-hidden>✓</span>
         </div>
@@ -105,12 +105,12 @@ export default function LeadForm({
   return (
     <form
       onSubmit={onSubmit}
-      className={`rounded-2xl border border-vw-line bg-white shadow-xl ${compact ? "p-5" : "p-6 sm:p-7"}`}
+      className={`rounded-2xl border border-vw-line bg-white shadow-[var(--shadow-form)] ${compact ? "p-5" : "p-6 sm:p-7"}`}
       noValidate
     >
       <div className="mb-5">
-        <h3 className="text-xl font-bold leading-tight text-vw-blue sm:text-2xl">{heading}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">{subheading}</p>
+        <h3 className="text-xl font-extrabold leading-tight tracking-tight text-vw-blue sm:text-[26px]">{heading}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-ink-soft">{subheading}</p>
       </div>
 
       <div className="grid gap-3">
@@ -208,7 +208,7 @@ export default function LeadForm({
         <button
           type="submit"
           disabled={status === "sending"}
-          className="mt-1 w-full rounded-xl bg-vw-cyan px-6 py-4 text-base font-bold text-vw-blue transition hover:bg-vw-blue hover:text-white disabled:opacity-70"
+          className="mt-1 w-full rounded-xl bg-vw-cyan px-6 py-4 text-base font-bold text-vw-blue shadow-sm transition hover:bg-vw-blue hover:text-white hover:shadow-lg disabled:opacity-70"
         >
           {status === "sending" ? "Sending..." : ctaLabel}
         </button>

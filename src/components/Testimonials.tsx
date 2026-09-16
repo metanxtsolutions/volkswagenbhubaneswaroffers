@@ -11,11 +11,11 @@ export default function Testimonials() {
       />
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {testimonials.map((item) => (
-          <figure key={item.name} className="flex h-full flex-col rounded-2xl border border-vw-line bg-white p-5 shadow-sm">
+          <figure key={item.name} className="surface flex h-full flex-col p-5">
             <div className="text-vw-cyan-dark" aria-label={`${item.rating} out of 5 stars`}>
               {"★".repeat(item.rating)}
             </div>
-            <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-slate-700">{item.quote}</blockquote>
+            <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">{item.quote}</blockquote>
             <figcaption className="mt-4 border-t border-vw-line pt-3 text-sm">
               <span className="font-bold text-vw-blue">{item.name}</span>
               <span className="block text-xs text-slate-500">

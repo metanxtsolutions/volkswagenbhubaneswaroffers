@@ -15,7 +15,7 @@ export default function Faqs({
   return (
     <section className="container-page py-16 sm:py-20">
       <SectionHeading eyebrow={eyebrow} title={title} subtitle={subtitle} />
-      <div className="mx-auto mt-10 max-w-3xl divide-y divide-vw-line rounded-2xl border border-vw-line bg-white">
+      <div className="surface mx-auto mt-10 max-w-3xl divide-y divide-vw-line overflow-hidden">
         {faqs.map((faq) => (
           <details key={faq.q} className="group px-5 py-4 sm:px-6">
             <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left text-base font-semibold text-vw-blue marker:hidden">
@@ -27,7 +27,7 @@ export default function Faqs({
                 +
               </span>
             </summary>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600">{faq.a}</p>
+            <p className="mt-3 text-sm leading-relaxed text-ink-soft">{faq.a}</p>
           </details>
         ))}
       </div>
